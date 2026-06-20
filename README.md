@@ -74,7 +74,7 @@ npm run dev
 
 ## Live Demo
 
-> Coming soon
+> apply-smart-aniqa.netlify.app
 
 ## Author
 
