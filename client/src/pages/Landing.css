@@ -239,3 +239,61 @@
   font-size: 13px;
   margin-bottom: 8px;
 }
+
+@media (max-width: 480px) {
+  .landing-nav {
+    padding: 0.75rem 1rem;
+  }
+
+  .logo-text {
+    font-size: 14px;
+  }
+
+  .nav-buttons {
+    gap: 6px;
+  }
+
+  .btn-outline,
+  .btn-primary {
+    padding: 7px 12px;
+    font-size: 12px;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 22px;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .hero-buttons button {
+    width: 100%;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(3, 1fr);
+    max-width: 100%;
+  }
+
+  .preview {
+    padding: 1.25rem 1rem;
+  }
+
+  .features-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .feature-card {
+    padding: 1rem;
+  }
+
+  .cta-footer {
+    padding: 1.5rem 1rem;
+  }
+}
