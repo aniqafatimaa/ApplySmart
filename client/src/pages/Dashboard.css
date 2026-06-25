@@ -113,7 +113,42 @@
   font-size: 14px;
   font-weight: 500;
 }
+/* Filters */
+.filter-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
 
+.filter-btn {
+  background: transparent;
+  border: 1px solid #e0e0e0;
+  color: #1a1a2e;
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: transform 150ms ease, box-shadow 150ms ease, background-color 150ms ease, color 150ms ease;
+}
+
+.filter-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(29,44,78,0.06);
+}
+
+.filter-active {
+  background: #2E86DE;
+  color: #fff !important;
+  border-color: #2E86DE;
+  box-shadow: 0 6px 18px rgba(46,134,222,0.15);
+}
+
+@media (max-width: 480px) {
+  .filter-btn { padding: 6px 10px; font-size: 12px; }
+}
 /* Form */
 .form-card {
   background: #fff;
