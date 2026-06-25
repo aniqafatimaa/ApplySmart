@@ -1,4 +1,4 @@
- import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { auth, db } from '../firebase'
 import { signOut } from 'firebase/auth'
@@ -13,6 +13,7 @@ const Dashboard = () => {
   const [loading, setLoading] = useState(true)
   const [showForm, setShowForm] = useState(false)
   const [editingId, setEditingId] = useState(null)
+  const [filter, setFilter] = useState('all')
   const [formData, setFormData] = useState({
     company: '',
     role: '',
@@ -22,7 +23,6 @@ const Dashboard = () => {
     notes: ''
   })
 
-  // Fetch applications
   useEffect(() => {
     if (user) fetchApplications()
   }, [user])
@@ -94,12 +94,13 @@ const Dashboard = () => {
     navigate('/')
   }
 
-  // Stats
   const total = applications.length
   const replied = applications.filter(a => a.status === 'replied' || a.status === 'interview' || a.status === 'offer').length
   const interviews = applications.filter(a => a.status === 'interview').length
   const rejected = applications.filter(a => a.status === 'rejected').length
   const replyRate = total > 0 ? Math.round((replied / total) * 100) : 0
+
+  const filteredApplications = applications.filter(app => filter === 'all' || app.status === filter)
 
   const statusColors = {
     applied: 'pill-applied',
@@ -112,16 +113,15 @@ const Dashboard = () => {
   return (
     <div className="dashboard">
 
-      {/* Navbar */}
       <nav className="dash-nav">
         <div className="nav-logo">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="3" y="6" width="18" height="13" rx="2" stroke="#6BAED6" strokeWidth="1.5"/>
-          <path d="M8 6V5C8 3.9 8.9 3 10 3H14C15.1 3 16 3.9 16 5V6" stroke="#6BAED6" strokeWidth="1.5"/>
-          <path d="M8 12H16" stroke="#6BAED6" strokeWidth="1.5" strokeLinecap="round"/>
-          <path d="M8 15.5H13" stroke="#6BAED6" strokeWidth="1.5" strokeLinecap="round"/>
-          <circle cx="19" cy="17" r="4" fill="#2E86DE"/>
-          <path d="M17.5 17L18.5 18L20.5 16" stroke="#fff" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+            <rect x="3" y="6" width="18" height="13" rx="2" stroke="#6BAED6" strokeWidth="1.5"/>
+            <path d="M8 6V5C8 3.9 8.9 3 10 3H14C15.1 3 16 3.9 16 5V6" stroke="#6BAED6" strokeWidth="1.5"/>
+            <path d="M8 12H16" stroke="#6BAED6" strokeWidth="1.5" strokeLinecap="round"/>
+            <path d="M8 15.5H13" stroke="#6BAED6" strokeWidth="1.5" strokeLinecap="round"/>
+            <circle cx="19" cy="17" r="4" fill="#2E86DE"/>
+            <path d="M17.5 17L18.5 18L20.5 16" stroke="#fff" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
           </svg>
           <span className="logo-text">ApplySmart</span>
         </div>
@@ -134,7 +134,6 @@ const Dashboard = () => {
 
       <div className="dash-content">
 
-        {/* Stats */}
         <div className="stats-row">
           <div className="stat-box">
             <span className="stat-num">{total}</span>
@@ -154,7 +153,6 @@ const Dashboard = () => {
           </div>
         </div>
 
-        {/* Header */}
         <div className="dash-header">
           <h2>Your Applications</h2>
           <button className="btn-add" onClick={() => { setShowForm(true); setEditingId(null); setFormData({ company: '', role: '', dateApplied: '', method: 'cold email', status: 'applied', notes: '' }) }}>
@@ -162,7 +160,18 @@ const Dashboard = () => {
           </button>
         </div>
 
-        {/* Form */}
+        <div className="filter-row">
+          {['all', 'applied', 'replied', 'interview', 'offer', 'rejected'].map(f => (
+            <button
+              key={f}
+              className={`filter-btn ${filter === f ? 'filter-active' : ''}`}
+              onClick={() => setFilter(f)}
+            >
+              {f === 'all' ? 'All' : f.charAt(0).toUpperCase() + f.slice(1)}
+            </button>
+          ))}
+        </div>
+
         {showForm && (
           <div className="form-card">
             <h3>{editingId ? 'Edit Application' : 'New Application'}</h3>
@@ -217,11 +226,10 @@ const Dashboard = () => {
           </div>
         )}
 
-        {/* Applications List */}
         {loading ? (
           <p className="empty-msg">Loading...</p>
-        ) : applications.length === 0 ? (
-          <p className="empty-msg">No applications yet. Add your first one!</p>
+        ) : filteredApplications.length === 0 ? (
+          <p className="empty-msg">{filter === 'all' ? 'No applications yet. Add your first one!' : `No ${filter} applications.`}</p>
         ) : (
           <div className="app-table">
             <div className="table-header">
@@ -232,7 +240,7 @@ const Dashboard = () => {
               <span>Status</span>
               <span>Actions</span>
             </div>
-            {applications.map(app => (
+            {filteredApplications.map(app => (
               <div className="table-row" key={app.id}>
                 <span className="company-name">{app.company}</span>
                 <span>{app.role}</span>
