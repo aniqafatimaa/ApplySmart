@@ -53,21 +53,21 @@ const Landing = () => {
         <div className="app-list">
           <div className="app-row">
             <div>
-              <p className="company">Outliant</p>
+              <p className="company">Acme Technologies</p>
               <p className="meta">Frontend Intern · Cold email · Jun 15</p>
             </div>
             <span className="pill pill-replied">Replied</span>
           </div>
           <div className="app-row">
             <div>
-              <p className="company">NineSol Technologies</p>
+              <p className="company">Bright Solutions</p>
               <p className="meta">Junior Dev · Job board · Jun 12</p>
             </div>
             <span className="pill pill-applied">Applied</span>
           </div>
           <div className="app-row">
             <div>
-              <p className="company">Proglia</p>
+              <p className="company">Nova Digital</p>
               <p className="meta">Frontend Dev · Cold email · Jun 10</p>
             </div>
             <span className="pill pill-interview">Interview</span>
