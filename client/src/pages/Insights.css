@@ -120,3 +120,28 @@
   color: #444;
   line-height: 1.7;
 }
+
+@media (max-width: 480px) {
+  .insights-content {
+    padding: 1rem;
+  }
+
+  .insights-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .btn-analyze {
+    width: 100%;
+    text-align: center;
+  }
+
+  .insights-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .insight-box {
+    padding: 1.25rem;
+  }
+}
