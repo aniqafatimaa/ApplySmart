@@ -51,7 +51,14 @@ const Signup = () => {
   return (
     <div className="auth-page">
       <nav className="auth-nav">
-        <span className="logo-icon">💼</span>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect x="3" y="6" width="18" height="13" rx="2" stroke="#6BAED6" strokeWidth="1.5"/>
+  <path d="M8 6V5C8 3.9 8.9 3 10 3H14C15.1 3 16 3.9 16 5V6" stroke="#6BAED6" strokeWidth="1.5"/>
+  <path d="M8 12H16" stroke="#6BAED6" strokeWidth="1.5" strokeLinecap="round"/>
+  <path d="M8 15.5H13" stroke="#6BAED6" strokeWidth="1.5" strokeLinecap="round"/>
+  <circle cx="19" cy="17" r="4" fill="#2E86DE"/>
+  <path d="M17.5 17L18.5 18L20.5 16" stroke="#fff" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+</svg>
         <span className="logo-text" onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>ApplySmart</span>
       </nav>
 
