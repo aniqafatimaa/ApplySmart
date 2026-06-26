@@ -14,6 +14,7 @@ const Dashboard = () => {
   const [showForm, setShowForm] = useState(false)
   const [editingId, setEditingId] = useState(null)
   const [filter, setFilter] = useState('all')
+  const [search, setSearch] = useState('')
   const [formData, setFormData] = useState({
     company: '',
     role: '',
@@ -100,7 +101,9 @@ const Dashboard = () => {
   const rejected = applications.filter(a => a.status === 'rejected').length
   const replyRate = total > 0 ? Math.round((replied / total) * 100) : 0
 
-  const filteredApplications = applications.filter(app => filter === 'all' || app.status === filter)
+  const filteredApplications = applications
+  .filter(app => filter === 'all' || app.status === filter)
+  .filter(app => app.company.toLowerCase().includes(search.toLowerCase()))
 
   const statusColors = {
     applied: 'pill-applied',
@@ -159,6 +162,20 @@ const Dashboard = () => {
             + Add Application
           </button>
         </div>
+
+
+       <div className="search-bar">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="11" cy="11" r="7" stroke="#888" strokeWidth="1.5"/>
+    <path d="M16.5 16.5L21 21" stroke="#888" strokeWidth="1.5" strokeLinecap="round"/>
+  </svg>
+  <input
+    type="text"
+    placeholder="Search by company name..."
+    value={search}
+    onChange={(e) => setSearch(e.target.value)}
+  />
+</div>
 
         <div className="filter-row">
           {['all', 'applied', 'replied', 'interview', 'offer', 'rejected'].map(f => (
