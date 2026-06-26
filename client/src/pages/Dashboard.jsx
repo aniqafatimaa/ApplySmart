@@ -229,7 +229,19 @@ const Dashboard = () => {
         {loading ? (
           <p className="empty-msg">Loading...</p>
         ) : filteredApplications.length === 0 ? (
-          <p className="empty-msg">{filter === 'all' ? 'No applications yet. Add your first one!' : `No ${filter} applications.`}</p>
+  <div className="empty-state">
+    <svg width="80" height="80" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="3" y="6" width="18" height="13" rx="2" stroke="#CBD5E0" strokeWidth="1.5"/>
+      <path d="M8 6V5C8 3.9 8.9 3 10 3H14C15.1 3 16 3.9 16 5V6" stroke="#CBD5E0" strokeWidth="1.5"/>
+      <path d="M8 12H16" stroke="#CBD5E0" strokeWidth="1.5" strokeLinecap="round"/>
+      <path d="M8 15.5H13" stroke="#CBD5E0" strokeWidth="1.5" strokeLinecap="round"/>
+    </svg>
+    <p className="empty-title">{filter === 'all' ? 'No applications yet' : `No ${filter} applications`}</p>
+    <p className="empty-sub">{filter === 'all' ? 'Add your first application to get started' : 'Try a different filter'}</p>
+    {filter === 'all' && (
+      <button className="btn-add" onClick={() => setShowForm(true)}>+ Add Application</button>
+    )}
+  </div>
         ) : (
           <div className="app-table">
             <div className="table-header">
